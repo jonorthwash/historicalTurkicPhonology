@@ -19,9 +19,9 @@ define Cleanup "^" -> 0;
 #define Lexcion
 
 define Grammar Lexicon .o.
-					DevoiceJ .o.
-					RoundN .o.
-					Cleanup ;
+               DevoiceJ .o.
+               RoundN .o.
+               Cleanup ;
 
 regex Grammar;
 
