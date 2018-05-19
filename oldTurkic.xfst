@@ -31,7 +31,7 @@ define gBacking g -> ʁ|| BackV _ ;
 define qBacking k -> q|| BackV _ ;
 
 # s voicing
-define sVoicing s -> z || V _ V ;
+define sVoicing s -> z || V _ [ V | .#. ] ;
 
 
 # Convert to Turkic orthography

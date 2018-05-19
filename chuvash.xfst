@@ -20,7 +20,7 @@ define gVocalism [ g | k ] -> ɯ || C _ ;
 define gLenition g -> w ;
 
 # s to r
-define sTor s -> r || V _ V ;
+define sTor s -> r || V _ [ V | .#. ] ;
 
 # ð to r
 define dhTor ð -> r ;
@@ -39,7 +39,7 @@ define ShortenV1 u -> ʊ ;
 define ShortenV2 y -> ʉ ;
 define ShortenV3 i -> ɘ ;
 define ShortenV4 ɯ -> ə ;
-define ShortenV5 o -> ʊ || C _ C ;
+define ShortenV5 o -> ʊ || [ C | .#. ] _ C ;
 
 # a→u
 define AtoU a -> u ;
