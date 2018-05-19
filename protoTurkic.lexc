@@ -1,0 +1,15 @@
+Multichar_Symbols
+
+%>
+%<n%>
+
+LEXICON Root
+
+Words ;
+
+LEXICON Words
+
+ʝyzyk:ʝyzyk # ;  ! "ring"
+aðaq:aðaq # ;    ! "foot"
+toŋ:toŋ # ;      ! "coat"
+oʁl:oʁl # ;      ! "son"

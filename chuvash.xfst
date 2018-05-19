@@ -1,0 +1,28 @@
+# Vowels
+define V [ a | e | i | o | u ];
+
+read lexc protoTurkic.lexc
+define Lexcion;
+
+# Devoice the palatal fricative
+define DevoiceJ ʝ -> ś ;
+
+# Round n
+define RoundN n -> m || [ u | o ] _ ;
+
+
+# Cleanup: remove morpheme boundaries
+define Cleanup "^" -> 0;
+
+# the docs say to do this twice, but it seems weird
+#read lexc protoTurkic.lexc
+#define Lexcion
+
+define Grammar Lexicon .o.
+					DevoiceJ .o.
+					RoundN .o.
+					Cleanup ;
+
+regex Grammar;
+
+save stack chuvash.hfst
