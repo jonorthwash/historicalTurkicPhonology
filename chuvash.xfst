@@ -1,11 +1,24 @@
 # Vowels
 define V [ a | e | i | o | u | y | ɯ | æ ];
-define C [ l | t | m | s ];
+define BackV [ a | o | u | ɯ ];
+define C [ l | t | m | s | r | g ];
 define eC1 [ g ];
 define eC2 [ l ];
 
 read lexc protoTurkic.lexc
 define Lexicon;
+
+# vowel swapping
+define aMarching1 [..] -> a || i _ C C a ;
+
+# s to ʃ
+define sTosh s -> ʃ || _ i ;
+
+# marched a reduction
+define aMarching2 a -> ɯ|| i a C C _ ;
+
+# vowel swapping deletion
+define aMarching3 i -> 0 || _ V ;
 
 # d lenition
 define dLenition d -> ð || V _ V ;
@@ -13,11 +26,26 @@ define dLenition d -> ð || V _ V ;
 # break coda clusters
 define CCtoCVC [..] -> ɯ|| eC1 _ eC2 ;
 
-# g to ɯ after consonants
-define gVocalism [ g | k ] -> ɯ || C _ ;
+# g to ɯ after consonants at end of word
+define gVocalism [ g | k ] -> ɯ || C _ .#. ;
+
+# g deletion after consonants before vowels
+define gDeletion g -> 0 || C _ V ;
 
 # g lenition
 define gLenition g -> w ;
+
+# b lenition
+define bLenition b -> w || V _ ;
+
+# b fortition
+define bFortition b -> p ;
+
+# g&q backing
+define gBacking g -> ʁ|| BackV _ ;
+define qBacking k -> q|| BackV _ ;
+define qBacking2 k -> q|| _ BackV ;
+define qLenition q -> x|| _ ;
 
 # s to r
 define sTor s -> r || V _ [ V | .#. ] ;
@@ -40,6 +68,7 @@ define ShortenV2 y -> ʉ ;
 define ShortenV3 i -> ɘ ;
 define ShortenV4 ɯ -> ə ;
 define ShortenV5 o -> ʊ || [ C | .#. ] _ C ;
+define ShortenV6 e -> ɘ || [ C | .#. ] _ C ;
 
 # a→u
 define AtoU a -> u ;
@@ -82,27 +111,38 @@ define CyrlC8 l -> л ;
 define CyrlC9 m -> м ;
 define CyrlCA n -> н ;
 define CyrlCB j -> й ;
+define CyrlCC x -> х ;
 
 # the docs say to do this twice, but it seems weird
 #read lexc protoTurkic.lexc
 #define Lexcion
 
 define Grammar Lexicon .o.
+               aMarching1 .o.
+               sTosh .o.
+               aMarching2 .o.
+               aMarching3 .o.
                dLenition .o.
                CCtoCVC .o.
                gVocalism .o.
+               gDeletion .o.
                gLenition .o.
+               bLenition .o.
+               bFortition .o.
+               gBacking .o.
+               qBacking .o. qBacking2 .o.
+               qLenition .o.
                sTor .o.
                dhTor .o.
                DevoiceJ .o.
                Mergeŋ .o.
                RoundN .o.
-               ShortenV1 .o. ShortenV2 .o. ShortenV3 .o. ShortenV4 .o. ShortenV5 .o.
+               ShortenV1 .o. ShortenV2 .o. ShortenV3 .o. ShortenV4 .o. ShortenV5 .o. #ShortenV6 .o.
 					AtoU .o.
                EtoA .o.
                FixVHFront .o. FixVHBack .o.
                CyrlV0 .o. CyrlV1 .o. CyrlV2 .o. CyrlV3 .o. CyrlV4 .o. CyrlV5 .o. CyrlV6 .o. CyrlV7 .o. CyrlV8 .o. CyrlV9 .o.
-               CyrlC0 .o. CyrlC1 .o. CyrlC2 .o. CyrlC3 .o. CyrlC4 .o. CyrlC5 .o. CyrlC6 .o. CyrlC7 .o. CyrlC8 .o. CyrlC9 .o. CyrlCA .o. CyrlCB .o.
+               CyrlC0 .o. CyrlC1 .o. CyrlC2 .o. CyrlC3 .o. CyrlC4 .o. CyrlC5 .o. CyrlC6 .o. CyrlC7 .o. CyrlC8 .o. CyrlC9 .o. CyrlCA .o. CyrlCB .o. CyrlCC .o.
                Cleanup ;
 
 regex Grammar ;

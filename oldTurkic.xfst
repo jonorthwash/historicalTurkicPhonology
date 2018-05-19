@@ -1,7 +1,7 @@
 # Vowels
 define V [ a | e | i | o | u | y | ɯ | æ ];
 define BackV [ a | o | u | ɯ ];
-define C [ l | t | m | s | ʃ | g | k ];
+define C [ l | t | m | s | ʃ | g | k | r ];
 define eC1 [ g ];
 define eC2 [ l ];
 
@@ -20,15 +20,31 @@ define dLenition d -> ð || V _ V ;
 # g deletion
 define gDeletion g -> 0 || C _ .#. ;
 
+# vowel swapping
+define aMarching1 [..] -> a || i _ C C a ;
+
+# s to ɕ
+define sTosch s -> ɕ || _ i ;
+
+# Final a deletion
+define aDeletion a -> 0 || C C _ .#. ;
+
+# ia to ā 1
+define iaToa1 a -> ā || i _ ;
+
+# ia to ā 2
+define iaToa2 i -> 0 || _ ā ;
+
 # break coda clusters
 define CCtoCuC [..] -> u|| [ o | u ] C _ C ;
 define CCtoCyC [..] -> y|| [ œ | y ] C _ C ;
-define CCtoCɯC [..] -> ɯ|| [ a | ɯ ] C _ C ;
+define CCtoCɯC [..] -> ɯ|| [ ā | a | ɯ ] C _ C ;
 define CCtoCiC [..] -> i|| [ e | i ] C _ C ;
 
 # g&q backing
 define gBacking g -> ʁ|| BackV _ ;
 define qBacking k -> q|| BackV _ ;
+define qBacking2 k -> q|| _ BackV ;
 
 # s voicing
 define sVoicing s -> z || V _ [ V | .#. ] ;
@@ -43,6 +59,7 @@ define TurkicV3 ɯ -> ı ;
 define TurkicC0 ʁ -> ğ ;
 define TurkicC1 ʃ -> ş ;
 define TurkicC2 j -> y ;
+define TurkicC1 ɕ -> ś ;
 
 
 
@@ -55,8 +72,12 @@ define Grammar Lexicon .o.
 					dLenition .o.
                Sigmatism .o.
 					gDeletion .o.
+					aMarching1 .o.
+					sTosch .o.
+					aDeletion .o.
+					iaToa1 .o. iaToa2 .o.
                CCtoCuC .o. CCtoCyC .o. CCtoCɯC .o. CCtoCiC .o.
-               gBacking .o. qBacking .o.
+               gBacking .o. qBacking .o. qBacking2 .o.
                sVoicing .o.
                TurkicV0 .o. TurkicV1 .o. TurkicV2 .o. TurkicV3 .o.
                TurkicC0 .o. TurkicC1 .o. TurkicC2 .o.
