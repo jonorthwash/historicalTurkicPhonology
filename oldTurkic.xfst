@@ -8,6 +8,9 @@ define eC2 [ l ];
 read lexc protoTurkic.lexc
 define Lexicon;
 
+# Lenite palatal fricative
+define LeniteJ ʝ -> j ;
+
 # l → ʃ after vowels
 define Sigmatism l -> ʃ || V _ [ V | .#. ] ;
 
@@ -39,6 +42,7 @@ define TurkicV3 ɯ -> ı ;
 
 define TurkicC0 ʁ -> ğ ;
 define TurkicC1 ʃ -> ş ;
+define TurkicC2 j -> y ;
 
 
 
@@ -47,13 +51,15 @@ define Cleanup "^" -> 0;
 
 
 define Grammar Lexicon .o.
+					LeniteJ .o.
 					dLenition .o.
                Sigmatism .o.
 					gDeletion .o.
                CCtoCuC .o. CCtoCyC .o. CCtoCɯC .o. CCtoCiC .o.
                gBacking .o. qBacking .o.
                sVoicing .o.
-               TurkicV0 .o. TurkicV1 .o. TurkicV2 .o. TurkicV3 .o. TurkicC0 .o. TurkicC1 .o.
+               TurkicV0 .o. TurkicV1 .o. TurkicV2 .o. TurkicV3 .o.
+               TurkicC0 .o. TurkicC1 .o. TurkicC2 .o.
                Cleanup ;
 
 regex Grammar ;
