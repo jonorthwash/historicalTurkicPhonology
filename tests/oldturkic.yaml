@@ -1,0 +1,40 @@
+Config:
+  hfst:
+    App: hfst-lookup
+    Gen: ../oldTurkic.hfst
+    Morph: ../oldTurkic.hfst
+
+Tests:
+  "[misc]":
+    ʝysk : yüzük
+    adak : aðaq
+    toŋ : toŋ
+    ogl : oğul
+    kymyl : kümüş
+    sagɯ : sağ
+    elik : eşik
+    elg : el
+
+  "[cons] s~s":
+    saw : sağ
+    sulɯ : sulı
+    kæs : kes
+    æsryk : äsrük
+    æs : es
+    soʁan : soğan
+    qɯsɯr : qısır
+
+  "[cons] z~s":
+    sæs : sez
+    tos : toz
+
+  "[nasals] m~m":
+    kymyl : kümüş
+    œlym : ölüm
+    orman : orman
+    æmæn : emen
+    ʝæmil : yemiş
+    ʝuml : yumşaq
+    tamɯr : tamır
+    ʝaʁmis : yamğır
+    omuz : omuz

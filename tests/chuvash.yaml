@@ -1,0 +1,40 @@
+Config:
+  hfst:
+    App: hfst-lookup
+    Gen: ../chuvash.hfst
+    Morph: ../chuvash.hfst
+
+Tests:
+  "[misc]":
+    ʝysk : ҫӗрӗ
+    adak : ура
+    toŋ : тӑм
+    ogl : ывӑл
+    kymyl : кӗмӗл
+    sagɯ : сывӑ
+    elik : алӑк
+    elg : алӑ
+
+  "[cons] s~s":
+    sagɯ : сывӑ
+    sulɯ : сӗлӗ
+    kæs : кас
+    æsrük : ӳсер
+    es : ӑс
+    sogan : сухан
+    kɯsɯr : хӗсӗр
+
+  "[cons] z~s":
+    sez : сис
+    toz : тусан
+
+  "[nasals] m~m":
+    kymyl : кӗмӗл
+    œlym : вилем
+    orman : вӑрман
+    emen : юман
+    yemil : ҫимӗҫ
+    yuml : ҫӑмӑл
+    tamır : тымар
+    yamʁır : ҫумӑр
+    omuz : ӑмӑр

@@ -1,0 +1,62 @@
+# Vowels
+define V [ a | e | i | o | u | y | ɯ | æ ];
+define BackV [ a | o | u | ɯ ];
+define C [ l | t | m | s | ʃ | g | k ];
+define eC1 [ g ];
+define eC2 [ l ];
+
+read lexc protoTurkic.lexc
+define Lexicon;
+
+# l → ʃ after vowels
+define Sigmatism l -> ʃ || V _ [ V | .#. ] ;
+
+# d lenition
+define dLenition d -> ð || V _ V ;
+
+# g deletion
+define gDeletion g -> 0 || C _ .#. ;
+
+# break coda clusters
+define CCtoCuC [..] -> u|| [ o | u ] C _ C ;
+define CCtoCyC [..] -> y|| [ œ | y ] C _ C ;
+define CCtoCɯC [..] -> ɯ|| [ a | ɯ ] C _ C ;
+define CCtoCiC [..] -> i|| [ e | i ] C _ C ;
+
+# g&q backing
+define gBacking g -> ʁ|| BackV _ ;
+define qBacking k -> q|| BackV _ ;
+
+# s voicing
+define sVoicing s -> z || V _ V ;
+
+
+# Convert to Turkic orthography
+define TurkicV0 y -> ü ;
+define TurkicV1 œ -> ö ;
+define TurkicV2 æ -> ä ;
+define TurkicV3 ɯ -> ı ;
+
+define TurkicC0 ʁ -> ğ ;
+define TurkicC1 ʃ -> ş ;
+
+
+
+# Cleanup: remove morpheme boundaries
+define Cleanup "^" -> 0;
+
+
+define Grammar Lexicon .o.
+					dLenition .o.
+               Sigmatism .o.
+					gDeletion .o.
+               CCtoCuC .o. CCtoCyC .o. CCtoCɯC .o. CCtoCiC .o.
+               gBacking .o. qBacking .o.
+               sVoicing .o.
+               TurkicV0 .o. TurkicV1 .o. TurkicV2 .o. TurkicV3 .o. TurkicC0 .o. TurkicC1 .o.
+               Cleanup ;
+
+regex Grammar ;
+
+
+save stack oldTurkic.hfst

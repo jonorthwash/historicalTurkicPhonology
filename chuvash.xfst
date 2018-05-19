@@ -1,28 +1,113 @@
 # Vowels
-define V [ a | e | i | o | u ];
+define V [ a | e | i | o | u | y | ɯ | æ ];
+define C [ l | t | m | s ];
+define eC1 [ g ];
+define eC2 [ l ];
 
 read lexc protoTurkic.lexc
-define Lexcion;
+define Lexicon;
+
+# d lenition
+define dLenition d -> ð || V _ V ;
+
+# break coda clusters
+define CCtoCVC [..] -> ɯ|| eC1 _ eC2 ;
+
+# g to ɯ after consonants
+define gVocalism [ g | k ] -> ɯ || C _ ;
+
+# g lenition
+define gLenition g -> w ;
+
+# s to r
+define sTor s -> r || V _ V ;
+
+# ð to r
+define dhTor ð -> r ;
 
 # Devoice the palatal fricative
-define DevoiceJ ʝ -> ś ;
+define DevoiceJ ʝ -> ɕ ;
+
+# ŋ merges with n
+define Mergeŋ ŋ -> n ;
 
 # Round n
 define RoundN n -> m || [ u | o ] _ ;
 
+# Shorten vowels
+define ShortenV1 u -> ʊ ;
+define ShortenV2 y -> ʉ ;
+define ShortenV3 i -> ɘ ;
+define ShortenV4 ɯ -> ə ;
+define ShortenV5 o -> ʊ || C _ C ;
+
+# a→u
+define AtoU a -> u ;
+
+# e→a
+define EtoA e -> a ;
+
+#fix harmony for ӗ
+define FixVHFront ɘ -> ə || [ a ] C _ ;
+
+#fix harmony for ӑ
+define FixVHBack ə -> ɘ || [ ɘ | ʉ ] C _ ;
+
 
 # Cleanup: remove morpheme boundaries
 define Cleanup "^" -> 0;
+
+# Convert to Cyrillic
+define MapToCyrillic [ a e u y i ɯ ʉ ɘ ʊ ə | а е у ӳ и ы ӗ ӗ ӑ ӑ ] ;
+define CyrlV0 a -> а ;
+define CyrlV1 e -> е ;
+define CyrlV2 u -> у ;
+define CyrlV3 y -> ӳ ;
+define CyrlV4 i -> и ;
+define CyrlV5 ɯ -> ы ;
+define CyrlV6 ʉ -> ӗ ;
+define CyrlV7 ɘ -> ӗ ;
+define CyrlV8 ʊ -> ӑ ;
+define CyrlV9 ə -> ӑ ;
+
+define CyrlC0 r -> р ;
+define CyrlC1 k -> к ;
+define CyrlC2 p -> п ;
+define CyrlC3 w -> в ;
+define CyrlC4 s -> с ;
+define CyrlC5 ɕ -> ҫ ;
+define CyrlC6 ʃ -> ш ;
+define CyrlC7 t -> т ;
+define CyrlC8 l -> л ;
+define CyrlC9 m -> м ;
+define CyrlCA n -> н ;
+define CyrlCB j -> й ;
 
 # the docs say to do this twice, but it seems weird
 #read lexc protoTurkic.lexc
 #define Lexcion
 
 define Grammar Lexicon .o.
+               dLenition .o.
+               CCtoCVC .o.
+               gVocalism .o.
+               gLenition .o.
+               sTor .o.
+               dhTor .o.
                DevoiceJ .o.
+               Mergeŋ .o.
                RoundN .o.
+               ShortenV1 .o. ShortenV2 .o. ShortenV3 .o. ShortenV4 .o. ShortenV5 .o.
+					AtoU .o.
+               EtoA .o.
+               FixVHFront .o. FixVHBack .o.
+               CyrlV0 .o. CyrlV1 .o. CyrlV2 .o. CyrlV3 .o. CyrlV4 .o. CyrlV5 .o. CyrlV6 .o. CyrlV7 .o. CyrlV8 .o. CyrlV9 .o.
+               CyrlC0 .o. CyrlC1 .o. CyrlC2 .o. CyrlC3 .o. CyrlC4 .o. CyrlC5 .o. CyrlC6 .o. CyrlC7 .o. CyrlC8 .o. CyrlC9 .o. CyrlCA .o. CyrlCB .o.
                Cleanup ;
 
-regex Grammar;
+regex Grammar ;
+
+#regex Grammar .P. MapToCyrillic ;
+
 
 save stack chuvash.hfst
